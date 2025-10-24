@@ -4,13 +4,15 @@ import favicon from 'serve-favicon'
 import dotenv from 'dotenv'
 
 // import the router from your routes file
-
+import carsRoutes from './routes/cars.js'
 
 dotenv.config()
 
 const PORT = process.env.PORT || 3000
 
 const app = express()
+
+app.use('/api/cars', carsRoutes)
 
 app.use(express.json())
 
@@ -34,3 +36,7 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(PORT, () => {
     console.log(`server listening on http://localhost:${PORT}`)
 })
+
+app.get('/', (req, res) => {
+    res.send('Backend is running!');
+});
